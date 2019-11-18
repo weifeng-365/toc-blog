@@ -1,14 +1,33 @@
-name: CI
-
+name: Main Workflow
 on: 
-  pull_request:
+  push:
     branches:
     - master
 jobs:
-  build:
-
+  publish:
+    name: Publish
     runs-on: ubuntu-latest
-
     steps:
-    - name: GitHub Action for hexo
-      uses: heowc/action-hexo@1.0.0
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: Install
+      run: npm install
+    - name: Clean
+      uses: heowc/action-hexo@master
+      with:
+        args: clean
+    - name: Generate
+      uses: heowc/action-hexo@master
+      with:
+        args: generate
+    - name: Deploy
+      uses: heowc/action-hexo@master
+      env:
+        EMAIL: wei.feng
+        NAME: wei.feng
+      with:
+        args: deploy
