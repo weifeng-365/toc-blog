@@ -16,17 +16,17 @@ jobs:
         node-version: '10.x'
 
     - name: Run hexo generate
-        run: |
+      run: |
           npm i -g hexo-cli
           hexo generate
-      - name: Run hexo deploy
-        env:
-          GH_DEPLOY_TOKEN: ${{secrets.GH_PAT}}
-        run: |
-          git config --global user.name 'wei.feng'
-          git config --global user.email 'wei.feng'
-          # sed -i "s/GH_PAT/${GH_PAT}/g" ./_config.yml
-          hexo deploy
+    - name: Run hexo deploy
+      env:
+        GH_DEPLOY_TOKEN: ${{secrets.GH_PAT}}
+      run: |
+        git config --global user.name 'wei.feng'
+        git config --global user.email 'wei.feng'
+        # sed -i "s/GH_PAT/${GH_PAT}/g" ./_config.yml
+        hexo deploy
 
     # - name: Checkout
     #   uses: actions/checkout@v1
