@@ -98,5 +98,5 @@ theme: fluid
 deploy:
   repo:
     # Either syntax is supported
-    github: https://github.com/weifeng-365/weifeng-365.github.io
+    github: git@github.com:weifeng-365/weifeng-365.github.io.git
     branch: master
