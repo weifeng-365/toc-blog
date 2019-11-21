@@ -19,6 +19,11 @@ jobs:
       run: |
         npm i -g hexo-cli
         npm i
+    - name: Prepare theme
+      run: |
+        git clone https://github.com/ppoffice/hexo-theme-hueman.git themes/hueman
+        cp themes/hueman/_config.yml.example themes/hueman/_config.yml
+        npm i
     - name: Prepare build environment
       env:
         GH_ACTION_DEPLOY_KEY: ${{secrets.GH_ACTION_DEPLOY_KEY}}
@@ -33,47 +38,4 @@ jobs:
         git config --global user.email 'wei.feng'
     - name: Deploy to GitHub Pages
       run: |
-        hexo generate && hexo deploy
-# jobs:
-#   publish:
-#     name: Publish
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v1
-#     - name: Setup Node
-#       uses: actions/setup-node@v1
-#       with:
-#         node-version: '10.x'
-#     - name: Run hexo generate
-#       run: |
-#           npm i -g hexo-cli
-#           npm install hexo-deployer-git --save
-#           npm install
-#           hexo generate
-#     - name: Run hexo deploy
-#       env:
-#         GH_PAT: ${{secrets.GH_PAT}}
-#       run: |
-#         git config --global user.name 'wei.feng'
-#         git config --global user.email 'wei.feng'
-#         sed -i "s/GH_PAT/${GH_PAT}/g" ./_config.yml
-#         hexo deploy
-
-    # - name: Checkout
-    #   uses: actions/checkout@v1
-    # - name: Install
-    #   run: npm install
-    # - name: Clean
-    #   uses: heowc/action-hexo@master
-    #   with:
-    #     args: clean
-    # - name: Generate
-    #   uses: heowc/action-hexo@master
-    #   with:
-    #     args: generate
-    # - name: Deploy to Github Pages
-    #   uses: maxheld83/ghpages@v0.2.1
-    #   env:
-    #     GH_PAT: ${{ secrets.HEXO_DEPLOY_PRI }}
-        # BUILD_DIR: /github/workspace/public/
+        hexo generate && hexo Deploy
