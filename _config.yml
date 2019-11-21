@@ -99,5 +99,5 @@ theme: fluid
 deploy:
   repo:
     type: git
-    github: git@github.com:weifeng-365/weifeng-365.github.io.git
+    github: GH_PAT@github.com:weifeng-365/weifeng-365.github.io.git
     branch: master
