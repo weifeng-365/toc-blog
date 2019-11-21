@@ -18,6 +18,7 @@ jobs:
     - name: Run hexo generate
       run: |
           npm i -g hexo-cli
+          npm install
           hexo generate
     - name: Run hexo deploy
       env:
