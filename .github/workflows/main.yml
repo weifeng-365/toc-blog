@@ -14,20 +14,23 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - name: Install
-      run: npm install
-    - name: Clean
-      uses: heowc/action-hexo@master
-      with:
-        args: clean
-    - name: Generate
-      uses: heowc/action-hexo@master
-      with:
-        args: generate
-    - name: Deploy
-      uses: heowc/action-hexo@master
+
+    - name: Configuration environment
       env:
-        EMAIL: wei.feng
-        NAME: wei.feng
-      with:
-        args: deploy
+        HEXO_DEPLOY_PRI: ${{secrets.HEXO_DEPLOY_PRI}}
+      run: |
+        mkdir -p ~/.ssh/
+        echo "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
+        chmod 400 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        git config --global user.name "wei.feng"
+        git config --global user.email "wei.feng"
+
+    - name: Install dependencies
+      run: |
+        npm i -g hexo-cli
+        npm i
+
+    - name: Deploy hexo
+      run: |
+        hexo g -d
