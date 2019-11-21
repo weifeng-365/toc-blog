@@ -3,31 +3,62 @@ on:
   push:
     branches:
     - master
+
 jobs:
-  publish:
-    name: Publish
-    runs-on: ubuntu-latest
+  build:
+
+    runs-on: ubuntu-18.04
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Setup Node
+    - uses: actions/checkout@v1
+    - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - name: Run hexo generate
+    - name: Set up dependecies
       run: |
-          npm i -g hexo-cli
-          npm install hexo-deployer-git --save
-          npm install
-          hexo generate
-    - name: Run hexo deploy
+        npm i -g hexo-cli
+        npm i
+    - name: Prepare build environment
       env:
-        GH_PAT: ${{secrets.GH_PAT}}
+        GH_ACTION_DEPLOY_KEY: ${{secrets.GH_ACTION_DEPLOY_KEY}}
       run: |
+        git submodule update --init --recursive
+        mkdir -p ~/.ssh/
+        echo "$GH_ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+        head ~/.ssh/id_rsa -n 2
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
         git config --global user.name 'wei.feng'
         git config --global user.email 'wei.feng'
-        sed -i "s/GH_PAT/${GH_PAT}/g" ./_config.yml
-        hexo deploy
+    - name: Deploy to GitHub Pages
+      run: |
+        hexo generate && hexo deploy
+# jobs:
+#   publish:
+#     name: Publish
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v1
+#     - name: Setup Node
+#       uses: actions/setup-node@v1
+#       with:
+#         node-version: '10.x'
+#     - name: Run hexo generate
+#       run: |
+#           npm i -g hexo-cli
+#           npm install hexo-deployer-git --save
+#           npm install
+#           hexo generate
+#     - name: Run hexo deploy
+#       env:
+#         GH_PAT: ${{secrets.GH_PAT}}
+#       run: |
+#         git config --global user.name 'wei.feng'
+#         git config --global user.email 'wei.feng'
+#         sed -i "s/GH_PAT/${GH_PAT}/g" ./_config.yml
+#         hexo deploy
 
     # - name: Checkout
     #   uses: actions/checkout@v1
