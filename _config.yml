@@ -1,10 +1,10 @@
 # Site
-title: Hexo
+title: TOC Blog
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
-language: en
+author: Feng Wei
+language: zh-CN
 timezone: ''
 
 # URL
@@ -71,7 +71,7 @@ per_page: 10
 pagination_dir: page
 
 # Extensions
-theme: hueman
+theme: cactus
 
 # Deployment
 deploy:

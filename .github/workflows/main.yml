@@ -21,8 +21,7 @@ jobs:
         npm i
     - name: Prepare theme
       run: |
-        git clone https://github.com/ppoffice/hexo-theme-hueman.git themes/hueman
-        cp themes/hueman/_config.yml.example themes/hueman/_config.yml
+        git clone https://github.com/probberechts/hexo-theme-cactus.git themes/cactus
         npm i
     - name: Prepare build environment
       env:
