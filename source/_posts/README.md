@@ -1,4 +1,9 @@
-# toc-blog
+---
+title: TOC BLOG
+date: 2019-11-21 10:15:56
+tags: Welcome to toc blog system
+---
+toc-blog
 
 This is the origin repo serving all the raw blogs, which is the markdown file.
 
