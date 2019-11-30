@@ -8,6 +8,7 @@ This is the origin repo serving all the raw blogs, which is the markdown file.
 
 1. run `./auto/create-template postname` to create a new markdown file in source/_posts.
 1. Fill your content.
+1. run `./auto/run-locally` to preview your post locally.
 1. Create a test branch and create PR on this repo.
 1. Wait the pr workflow success.
 1. After the administrator of toc blog approved and merged, your blog will be displayed on our blog system.
