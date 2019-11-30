@@ -1,7 +1,5 @@
 #!/bin/bash -eu
 
-git submodule update --init --recursive
-
 mkdir -p ~/.ssh/
 echo "$GH_ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
 head ~/.ssh/id_rsa -n 2
