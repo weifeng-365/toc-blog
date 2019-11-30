@@ -1,0 +1,30 @@
+name: Main Workflow
+on: 
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Code checkout
+      uses: actions/checkout@v1
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+
+    - name: Markdown link check
+    - uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
+
+    - name: Build dependencies
+      run: auto/build
+
+    - name: Deploy to GitHub Pages
+      env:
+        GH_ACTION_DEPLOY_KEY: ${{secrets.GH_ACTION_DEPLOY_KEY}}
+      run: auto/deploy
