@@ -16,7 +16,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v1
       with:
-        node-version: '10.x'
+        node-version: '22.x'
 
     - name: Markdown link check
       uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
