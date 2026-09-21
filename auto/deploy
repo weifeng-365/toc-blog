@@ -8,4 +8,5 @@ ssh-keyscan -T 10 github.com >> ~/.ssh/known_hosts
 git config --global user.name 'wei.feng'
 git config --global user.email 'wei.feng'
 
-hexo generate && hexo Deploy
+npm run build
+npm run deploy
