@@ -4,12 +4,20 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
 
     steps:
     - name: Code checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v7
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v7
+      with:
+        node-version: '24.x'
 
     - name: Markdown link check
-      uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
+      run: >-
+        find README.md source -name '*.md' -type f
+        -exec npx --yes markdown-link-check@3.13.7
+        --config .github/markdown-link-check.json --quiet {} \;

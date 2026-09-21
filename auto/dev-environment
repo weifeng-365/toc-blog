@@ -6,4 +6,4 @@ trap "docker-compose down --volumes" 0
 
 docker-compose build dev
 
-docker-compose run --rm --service-port dev "${@-bash}"
+docker-compose run --rm --service-ports dev "${@-bash}"

@@ -1,6 +1,3 @@
 #!/bin/bash -e
 
-git submodule update --init --recursive
-
-npm i -g hexo-cli
-npm i
+npm ci
