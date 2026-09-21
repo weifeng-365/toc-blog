@@ -4,12 +4,12 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
 
     steps:
     - name: Code checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v4
 
     - name: Markdown link check
-      uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
+      uses: gaurav-nelson/github-action-markdown-link-check@v1

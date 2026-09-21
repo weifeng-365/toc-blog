@@ -1,15 +1,15 @@
-FROM node:10
+FROM node:20
 
 WORKDIR /work
 
 COPY package.json package.json
-COPY yarn.lock yarn.lock
+COPY package-lock.json package-lock.json
 COPY scaffolds/ scaffolds/
 COPY source/ source/
 COPY themes/ themes/
 COPY _config.yml _config.yml
 
-RUN npm i -g hexo-cli && npm i
+RUN npm ci
 
 # Defaults
 ENV PORT 4000
@@ -17,4 +17,4 @@ ENV PORT 4000
 # Expose app-server port
 EXPOSE $PORT
 
-RUN hexo generate
+RUN npm run build

@@ -6,20 +6,23 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
 
     steps:
     - name: Code checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
 
     - name: Set up Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
-        node-version: '10.x'
+        node-version: '20.x'
+        cache: npm
 
     - name: Markdown link check
-      uses: gaurav-nelson/github-action-markdown-link-check@0.4.0
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
 
     - name: Build dependencies
       run: auto/build
